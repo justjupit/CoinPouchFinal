@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
                                 if(document.data["username"] == txtName.text.toString() && document.data["password"] == txtPassword.text.toString()){
                                    intent = Intent(this@MainActivity,MainActivity2::class.java).apply{
                                         putExtra("username",txtName.text.toString())
+                                        putExtra("date",dts.toString())
                                     }
                                     startActivity(intent)
                                 }
@@ -86,6 +87,7 @@ class MainActivity : AppCompatActivity() {
 
                 intent = Intent(this@MainActivity,MainActivity2::class.java).apply{
                     putExtra("username",txtName.text.toString())
+                    putExtra("date",dts.toString())
                 }
                 startActivity(intent)
             }

@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main2.*
 import kotlinx.android.synthetic.main.content_main.*
 import java.text.SimpleDateFormat
@@ -16,19 +17,27 @@ class MainActivity2 : AppCompatActivity() {
 
     var db = FirebaseFirestore.getInstance()
     var user:MutableMap<String, Any> = HashMap()
+    var user2:MutableMap<String, Any> = HashMap()
+    var user3:MutableMap<String, Any> = HashMap()
+    var user4:MutableMap<String, Any> = HashMap()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
 
+        user2["out"]=0
+        user3["in"]=0
+        user4["budget"]=0
+
         var intent = getIntent()
         val name: String? = intent.getStringExtra("username")
+        val date: String? = intent.getStringExtra("date")
         txtUser.text = name.toString()
 
         val sdf = SimpleDateFormat("dd MMMM yyyy")
         val c = Calendar.getInstance()
         val dts = sdf.format(c.getTime())
-        txtDate.text = dts.toString()
+        txtDate.text = date.toString()
 
         reportOut()
         reportIn()
@@ -43,6 +52,8 @@ class MainActivity2 : AppCompatActivity() {
                 reportOut()
                 reportIn()
                 reportBudget()
+
+                addDefault()
             }
         })
         nxtDay.setOnClickListener(object: View.OnClickListener{
@@ -53,6 +64,8 @@ class MainActivity2 : AppCompatActivity() {
                 reportOut()
                 reportIn()
                 reportBudget()
+
+                addDefault()
             }
         })
         btnTransaction.setOnClickListener(object : View.OnClickListener{
@@ -87,6 +100,7 @@ class MainActivity2 : AppCompatActivity() {
     }
 
     fun reportOut(){
+
         db.collection(txtUser.text.toString())
                 .document(txtDate.text.toString())
                 .collection("output")
@@ -106,9 +120,8 @@ class MainActivity2 : AppCompatActivity() {
                     }
                     else reportOut.text = ""
                 }
-            .addOnFailureListener{
 
-            }
+
 
         db.collection(txtUser.text.toString())
             .document(txtDate.text.toString())
@@ -123,13 +136,14 @@ class MainActivity2 : AppCompatActivity() {
                 txtTotalOut.setTextColor(Color.RED)
                 txtTotalOut.text ="Total Output= "+totalout.toString()
             }
-            .addOnFailureListener{
 
-            }
+
+
 
     }
 
     fun reportIn(){
+
         db.collection(txtUser.text.toString())
                 .document(txtDate.text.toString())
                 .collection("input")
@@ -143,9 +157,8 @@ class MainActivity2 : AppCompatActivity() {
                     if (msg!="") reportIn.text = msg
                     else reportIn.text = ""
                 }
-                .addOnFailureListener{
-                    Toast.makeText(baseContext,"No Data",Toast.LENGTH_LONG).show()
-                 }
+
+
 
         db.collection(txtUser.text.toString())
             .document(txtDate.text.toString())
@@ -160,12 +173,11 @@ class MainActivity2 : AppCompatActivity() {
                 txtTotalIn.setTextColor(Color.GREEN)
                 txtTotalIn.text ="Total Input= "+totalinp.toString()
             }
-            .addOnFailureListener{
-                Toast.makeText(baseContext,"No Data",Toast.LENGTH_LONG).show()
-            }
     }
 
     fun reportBudget(){
+
+
         db.collection(txtUser.text.toString())
             .document(txtDate.text.toString())
             .get()
@@ -176,9 +188,26 @@ class MainActivity2 : AppCompatActivity() {
                 if(msgbudget!="") txtTodayBudget.text =  msgbudget
                 else txtTodayBudget.text = "Budget hasn't been set"
             }
-            .addOnFailureListener{
-                Toast.makeText(baseContext,"No Data",Toast.LENGTH_LONG).show()
-            }
+
+
+    }
+
+    fun addDefault(){
+        db.collection(txtUser.text.toString())
+            .document(txtDate.text.toString())
+            .collection("output")
+            .document("default")
+            .set(user2)
+
+        db.collection(txtUser.text.toString())
+            .document(txtDate.text.toString())
+            .collection("input")
+            .document("default")
+            .set(user3)
+
+        db.collection(txtUser.text.toString())
+            .document(txtDate.text.toString())
+            .set(user4)
     }
 }
 

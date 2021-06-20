@@ -52,6 +52,7 @@ class Menu : AppCompatActivity() {
                             .set(user)
                     intent = Intent(this@Menu,MainActivity2::class.java).apply {
                         putExtra("username",txtUserMenu.text.toString())
+                        putExtra("date",date.toString())
                     }
                     startActivity(intent)
 
@@ -67,6 +68,7 @@ class Menu : AppCompatActivity() {
                             .set(user)
                     intent = Intent(this@Menu,MainActivity2::class.java).apply {
                         putExtra("username",txtUserMenu.text.toString())
+                        putExtra("date",date.toString())
                     }
                     startActivity(intent)
                 }
