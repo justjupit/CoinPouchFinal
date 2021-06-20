@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "214849598867",
+    "project_id": "coin-pouch-2ad65",
+    "storage_bucket": "coin-pouch-2ad65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214849598867:android:c680f074a85816e6d56466",
+        "android_client_info": {
+          "package_name": "com.jupiter.coinpouch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "214849598867-g0qgear0ia3csoisdtag406of4demdt2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzniP5P0RKOrE1U_NtaPMx284pGJSe5XE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "214849598867-g0qgear0ia3csoisdtag406of4demdt2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

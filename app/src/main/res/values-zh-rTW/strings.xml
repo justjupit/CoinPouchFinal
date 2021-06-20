@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">錢包</string>
+    <string name="title_activity_main_menu">首頁</string>
+    <string name="action_sign_in">登入</string>
+    <string name="action_sign_up">註冊</string>
+    <string name="prompt_account">帳號</string>
+    <string name="prompt_password">密碼</string>
+</resources>
